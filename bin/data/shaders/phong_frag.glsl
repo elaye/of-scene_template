@@ -53,6 +53,8 @@ void main(){
 	vec3 d = material.diffuse * light.color * light.power * cosTheta;
 	// Specular
 	vec3 s = material.specular * light.color * light.power * pow(cosAlpha, material.shininess);
-	
-	color = vec4(a + d + s, 1.0);
+
+	vec3 linearColor = a + d + s;
+	vec3 gamma = vec3(1.0/2.2);
+	color = vec4(pow(linearColor, gamma), 1.0);	
 }
